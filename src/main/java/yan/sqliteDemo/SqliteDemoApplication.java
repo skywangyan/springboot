@@ -8,7 +8,7 @@ public class SqliteDemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SqliteDemoApplication.class, args);
-		System.out.println("java 11 springboot run");
+		System.out.println("hello springboot");
 	}
 
 }
