@@ -1,6 +1,9 @@
 package yan.sqliteDemo;
+import ch.qos.logback.core.encoder.EchoEncoder;
 import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.*;
 
 @SpringBootApplication
@@ -11,7 +14,6 @@ public class SqliteDemoApplication {
 		System.out.println("hello springboot!");
 		SqliteDemoApplication app = new SqliteDemoApplication();
 		app.connect();
-		app.select("PSU");
 	}
 
 	public void connect() {
@@ -19,8 +21,8 @@ public class SqliteDemoApplication {
 		try {
 			String url = "jdbc:sqlite:C:/Users/ywang/Dropbox/sqlite/classification.db";
 			conn = DriverManager.getConnection(url);
-			System.out.println("connection established!");
-			select("dummy");
+			System.out.println("connection established! Please input description key words. ");
+			select(getClientInput());
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -41,10 +43,14 @@ public class SqliteDemoApplication {
 		}
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM PASSWDS");
+			ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM PASSWDS WHERE DESCRIPTION LIKE '%%%s%%'", description));
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				System.out.println(id);
+				String pw = rs.getString("passwd");
+				String username = rs.getString("username");
+				String trueDescirption = rs.getString("description");
+				System.out.println(String.format("| %5d | %80s | %30s | %15s", id, trueDescirption, username, pw));
+
 			}
 			rs.close();
 			stmt.close();
@@ -56,6 +62,16 @@ public class SqliteDemoApplication {
 
 
 
-
 	}
+	private String getClientInput() {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String res = "";
+		try {
+			res = br.readLine();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return res;
+	}
+
 }
