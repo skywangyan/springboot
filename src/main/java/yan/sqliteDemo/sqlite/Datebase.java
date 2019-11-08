@@ -15,11 +15,9 @@ public class Datebase {
             String url = "jdbc:sqlite:C:/Users/ywang/Dropbox/sqlite/classification.db";
             conn = DriverManager.getConnection(url);
             System.out.println("connection established! Please input description key words. ");
-            while (true) {
-                String des = getClientInput();
-                System.out.println(String.format("query description key word : %s", des));
-                select(des);
-            }
+            String des = getClientInput();
+            System.out.println(String.format("query description key word : %s", des));
+            select(des);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
