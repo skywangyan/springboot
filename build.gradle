@@ -15,6 +15,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.27.2.1'
+	compile group: 'io.hawt', name: 'hawtio-springboot', version: '1.4.38'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
