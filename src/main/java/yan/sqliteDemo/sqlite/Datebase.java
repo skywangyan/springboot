@@ -12,7 +12,7 @@ public class Datebase {
     public void connect() {
         conn = null;
         try {
-            String url = "jdbc:sqlite:C:/Users/ywang/Dropbox/sqlite/classification.db";
+            String url = "jdbc:sqlite:D:/Dropbox/sqlite/classification.db";
             conn = DriverManager.getConnection(url);
             System.out.println("connection established! Please input description key words. ");
             String des = getClientInput();
