@@ -13,7 +13,6 @@ import yan.sqliteDemo.sqlite.Datebase;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@Configuration
 @ComponentScan(basePackages="yan.sqliteDemo")
 public class SqliteDemoApplication {
 	@Autowired
@@ -26,8 +25,6 @@ public class SqliteDemoApplication {
 	private SQLJmxBean sqljmxb;
 
 	public static void main(String[] args) {
-		//disable hawtio authentication
-		//System.setProperty("hawtio.authenticationEnabled", "false");
 		SpringApplication.run(SqliteDemoApplication.class, args);
 		System.out.println("hello springboot!");
 	}
