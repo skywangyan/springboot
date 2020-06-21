@@ -1,5 +1,9 @@
 package yan.sqliteDemo.sqlite;
 
+import org.springframework.context.annotation.EnableMBeanExport;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -7,6 +11,8 @@ import java.io.InputStreamReader;
 import java.sql.*;
 
 @Component
+@EnableMBeanExport
+@ManagedResource
 public class Datebase {
     private Connection conn;
     public void connect() {
@@ -31,7 +37,7 @@ public class Datebase {
             }
         }
     }
-
+    @ManagedAttribute
     public void select(String description) {
         if (conn == null) {
             System.out.println("not connected!");
@@ -58,6 +64,8 @@ public class Datebase {
 
 
     }
+
+    @ManagedOperation
     private String getClientInput() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String res = "";
